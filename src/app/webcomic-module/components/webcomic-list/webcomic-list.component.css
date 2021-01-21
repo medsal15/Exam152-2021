@@ -1,0 +1,13 @@
+app-webcomic-mini {
+  width: 99%;
+  display: block;
+  min-height: 100px;
+  border: 1px solid orange;
+  margin-top: 5px;
+}
+#webcomic-list-left {
+  border: 1px solid yellowgreen;
+}
+input {
+  width: 90%;
+}

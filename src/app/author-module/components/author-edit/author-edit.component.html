@@ -1,0 +1,36 @@
+<div>
+  <table>
+    <tr>
+      <td><label for="name">Name</label></td>
+      <td><input type="text" id="name" (change)="onNameChange($event)" value="{{ this.fake_author.name }}" /></td>
+    </tr>
+    <tr>
+      <td><label for="webcomics">Webcomics</label></td>
+      <td></td>
+    </tr>
+    <tr *ngFor="let webcomic of this.webcomics">
+      <td><label for="webcomic_{{ webcomic.id }}">{{ webcomic.name }}</label></td>
+      <td>
+        <input type="checkbox" name="webcomics" value="webcomic_{{ webcomic.id }}" id="webcomic_{{ webcomic.id }}"
+          (change)="onWebcomicChange(webcomic.id)" [checked]="this.fake_author.webcomics.includes(webcomic.id)"/>
+      </td>
+    </tr>
+    <tr>
+      <td><label for="sociallinks">Social Links</label></td>
+      <td></td>
+    </tr>
+    <tr *ngFor="let link of this.sociallinks">
+      <td><label for="sociallink_{{ link.id }}">{{ link.url }}</label></td>
+      <input type="text" name="sociallinks" id="sociallink_{{ link.id }}" (change)="onSocialLinkChange(link.id, $event)" value="{{ link.url }}"/>
+      <button (click)="removeSocialLink(link.id)">X</button>
+    </tr>
+    <tr>
+      <td></td>
+      <td><button (click)="createSocialLink()">+</button></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input type="submit" value="Save author" (click)="saveAuthor()" /></td>
+    </tr>
+  </table>
+</div>

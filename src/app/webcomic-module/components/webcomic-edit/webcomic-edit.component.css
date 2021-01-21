@@ -1,0 +1,6 @@
+td {
+  min-width: 100px;
+}
+table, tr {
+  min-width: 100%;
+}

@@ -1,0 +1,35 @@
+<div>
+  <table>
+    <tr>
+      <td><label for="name">Name</label></td>
+      <td><input type="text" id="name" (change)="onNameChange($event)" value="{{ this.fake_webcomic.name }}" /></td>
+    </tr>
+    <tr>
+      <td><label for="url">Url</label></td>
+      <td><input type="text" id="url" (change)="onUrlChange($event)" value="{{ this.fake_webcomic.url }}"/></td>
+    </tr>
+    <tr>
+      <td><label for="state">State</label></td>
+      <td>
+        <select id="state" name="state">
+          <option *ngFor="let state of states" id="state_{{ state[0] }}" value="{{ state[0] }}">{{ state[1] }}</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td><label for="authors">Authors</label></td>
+      <td></td>
+    </tr>
+    <tr *ngFor="let author of this.authors">
+      <td><label for="author_{{ author.id }}">{{ author.name }}</label></td>
+      <td>
+        <input type="checkbox" name="authors" value="author_{{ author.id }}" id="author{{ author.id }}"
+          (change)="onAuthorChange(author.id)" [checked]="this.fake_webcomic.authors.includes(author.id)" />
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input type="submit" value="Save webcomic" (click)="saveWebcomic()" /></td>
+    </tr>
+  </table>
+</div>

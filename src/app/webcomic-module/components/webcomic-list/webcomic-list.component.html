@@ -1,0 +1,11 @@
+<div class="container-2">
+  <div id="webcomic-list-left">
+    <input type="text" id="webcomicsearch" (change)="onSearchChange($event)"/>
+    <button (click)="newWebcomic()">New Webcomic</button>
+    <div *ngFor="let webcomic of this.webcomics">
+      <app-webcomic-mini [webcomic]="webcomic" (webcomicDelete)="removeWebcomic($event)" (webcomicSelect)="displayWebcomic($event)"></app-webcomic-mini>
+    </div>
+  </div>
+  <app-webcomic-edit (webcomicUpdate)="updateWebcomic($event)" (webcomicSetImage)="setWebcomicImage($event)" (webcomicCreate)="addWebcomic($event)"
+    (webcomicAuthorLink)="linkWebcomicAuthor($event)" (webcomicAuthorUnlink)="unlinkWebcomicAuthor($event)"></app-webcomic-edit>
+</div>

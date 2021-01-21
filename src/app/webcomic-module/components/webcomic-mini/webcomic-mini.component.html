@@ -1,0 +1,4 @@
+<div>
+  <img *ngIf="image().length > 0" src="{{ image() }}" width="110" height="110" />
+  <b (click)="select()">{{ this.webcomic ? this.webcomic.name : '[new]' }}</b><span class="close" (click)="delete()">X</span>
+</div>

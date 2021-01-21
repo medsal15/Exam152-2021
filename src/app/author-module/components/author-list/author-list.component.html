@@ -1,0 +1,11 @@
+<div class="container-2">
+  <div id="author-list-left">
+    <input type="text" id="authorsearch" (change)="onSearchChange($event)" />
+    <button (click)="newAuthor()">New author</button>
+    <div *ngFor="let author of this.authors">
+      <app-author-mini [author]="author" (authorDelete)="removeAuthor($event)" (authorSelect)="displayAuthor($event)"></app-author-mini>
+    </div>
+  </div>
+  <app-author-edit (authorUpdate)="updateAuthor($event)" (authorCreate)="addAuthor($event)"
+    (authorWebcomicLink)="linkAuthorWebcomic($event)" (authorWebcomicUnlink)="unlinkAuthorWebcomic($event)"></app-author-edit>
+</div>

@@ -1,0 +1,8 @@
+<div class="container-2">
+  <div id="portal-left">
+    <div *ngFor="let button of buttons">
+      <a routerLink="{{ button.target }}">{{ button.name }}</a>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>
