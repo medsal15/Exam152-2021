@@ -43,6 +43,11 @@ export class WebcomicEditComponent implements OnInit {
     return states;
   }
 
+  get image() : string  {
+    if (!this.fake_webcomic.picture) return '';
+    return `data:image/png;base64,${this.fake_webcomic.picture}`;
+  }
+
   ngOnInit(): void {
     this.reloadAuthors();
   }
@@ -68,16 +73,12 @@ export class WebcomicEditComponent implements OnInit {
     if (!files.length) return;
 
     let file = files[0];
-    if (/^image\//.test(file.type)) return;
+    if (!/^image\//.test(file.type)) return;
 
     let formdata = new FormData;
     formdata.set('file', file);
     this.webcomicSetImage.emit([this.fake_webcomic.id, formdata]);
     file_input.value = null;
-  }
-
-  onStateSelect(state: number) : void {
-    this.fake_webcomic.state = +state;
   }
 
   onAuthorChange(selected: number) : void {
@@ -118,12 +119,14 @@ export class WebcomicEditComponent implements OnInit {
       this.fake_webcomic.id = 0;
       this.fake_webcomic.state = 0;
       this.fake_webcomic.authors = [];
+      this.fake_webcomic.picture = '';
     } else {
       this.fake_webcomic.name = webcomic.name;
       this.fake_webcomic.url = webcomic.url;
       this.fake_webcomic.id = webcomic.id;
       this.fake_webcomic.state = webcomic.state;
       this.fake_webcomic.authors = webcomic.authors;
+      this.fake_webcomic.picture = webcomic.picture;
     }
 
     this.reloadAuthors();

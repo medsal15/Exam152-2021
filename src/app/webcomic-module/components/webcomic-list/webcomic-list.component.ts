@@ -47,7 +47,7 @@ export class WebcomicListComponent implements OnInit {
   }
 
   setWebcomicImage([id, image]: [number, FormData]) : void {
-    this.webcomicService.setImage(id, image);
+    this.webcomicService.setImage(id, image).subscribe(() => this.reloadWebcomics());
   }
 
   displayWebcomic(webcomic: Webcomic) : void {
