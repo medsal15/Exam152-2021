@@ -21,6 +21,9 @@ export class AuthorEditComponent implements OnInit {
   @Output() readonly authorCreate = new EventEmitter<Author>();
   @Output() readonly authorWebcomicLink = new EventEmitter<[number, number]>();
   @Output() readonly authorWebcomicUnlink = new EventEmitter<[number, number]>();
+  @Output() readonly authorAddSocialLink = new EventEmitter<SocialLink>();
+  @Output() readonly authorUpdateSocialLink = new EventEmitter<SocialLink>();
+  @Output() readonly authorDeleteSocialLink = new EventEmitter<number>();
 
   fake_author: Author = {
     name: '',
@@ -123,9 +126,13 @@ export class AuthorEditComponent implements OnInit {
         this.authorWebcomicUnlink.emit([this.fake_author.id, webcomic]);
       }
 
-      this.added_sociallinks.forEach(link => this.sociallinksService.addSocialLink(link).subscribe());
-      this.changed_sociallinks.forEach(link => this.sociallinksService.updateSocialLink(link).subscribe());
-      this.removed_sociallinks.forEach(link => this.sociallinksService.removeSocialLink(link.id).subscribe());
+      this.added_sociallinks.forEach(link => this.authorAddSocialLink.emit(link));
+      this.changed_sociallinks.forEach(link => this.authorUpdateSocialLink.emit(link));
+      this.removed_sociallinks.forEach(link => this.authorDeleteSocialLink.emit(link.id));
+
+      this.added_sociallinks = [];
+      this.changed_sociallinks = [];
+      this.removed_sociallinks = [];
     }
 
     this.base_webcomics = [...this.fake_author.webcomics];

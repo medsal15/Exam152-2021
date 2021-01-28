@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Author } from 'src/app/author-module/models/author';
+import { SocialLink } from '../../models/sociallink';
 import { AuthorService } from '../../services/author/author.service';
+import { SociallinkService } from '../../services/sociallink/sociallink.service';
 import { AuthorEditComponent } from '../author-edit/author-edit.component';
 
 @Component({
@@ -10,7 +12,10 @@ import { AuthorEditComponent } from '../author-edit/author-edit.component';
 })
 export class AuthorListComponent implements OnInit {
 
-  constructor(private authorService: AuthorService) { }
+  constructor(
+    private authorService: AuthorService,
+    private socialLinkService: SociallinkService,
+  ) { }
 
   ngOnInit(): void {
     this.reloadAuthors();
@@ -26,9 +31,9 @@ export class AuthorListComponent implements OnInit {
     this.authorService.getAuthors(this.search).subscribe(data => {
       if (!data) return;
       this.authors = data;
-      if (update) {
+      if (update && this.child.fake_author.id != 0) {
         // Set the editor to the new author
-        this.child.setAuthor(this.authors[this.authors.length - 1]);
+        this.child.setAuthor(this.authors.find(a => a.id == this.child.fake_author.id));
       }
     }, error => console.error(error));
   }
@@ -60,6 +65,18 @@ export class AuthorListComponent implements OnInit {
   unlinkAuthorWebcomic([author, webcomic]: [number, number]) : void {
     this.authorService.unlinkAuthorWebcomic(author, webcomic).subscribe(() => this.reloadAuthors());
   }
+
+  authorLinkAdd(link: SocialLink) : void {
+    this.socialLinkService.addSocialLink(link).subscribe(() => this.reloadAuthors(true));
+  }
+
+  authorLinkUpdate(link: SocialLink) : void {
+    this.socialLinkService.updateSocialLink(link).subscribe(() => this.reloadAuthors(true));
+  }
+
+  authorLinkDelete(link: number) : void {
+    this.socialLinkService.removeSocialLink(link).subscribe(() => this.reloadAuthors(true));
+  };
 
   onSearchChange(event: Event) : void
   {

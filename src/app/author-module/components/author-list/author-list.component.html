@@ -7,5 +7,7 @@
     </div>
   </div>
   <app-author-edit (authorUpdate)="updateAuthor($event)" (authorCreate)="addAuthor($event)"
-    (authorWebcomicLink)="linkAuthorWebcomic($event)" (authorWebcomicUnlink)="unlinkAuthorWebcomic($event)"></app-author-edit>
+    (authorWebcomicLink)="linkAuthorWebcomic($event)" (authorWebcomicUnlink)="unlinkAuthorWebcomic($event)"
+    (authorAddSocialLink)="authorLinkAdd($event)" (authorDeleteSocialLink)="authorLinkDelete($event)"
+    (authorUpdateSocialLink)="authorLinkUpdate($event)"></app-author-edit>
 </div>

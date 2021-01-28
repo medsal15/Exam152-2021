@@ -1,3 +1,7 @@
 <div>
   <b (click)="select()">{{ this.author ? this.author.name : '[new]' }}</b><span class="close" (click)="delete()">X</span>
+  <br /><br />
+  <div *ngFor="let link of author.socialLinks">
+    <a href="{{ link.url }}">{{ link.url }}</a>
+  </div>
 </div>
