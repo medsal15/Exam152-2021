@@ -1,5 +1,5 @@
 <div>
   <img *ngIf="image().length > 0" src="{{ image() }}" width="110" height="110"/>
-  <b (click)="select()">{{ this.webcomic ? this.webcomic.name : '[new]' }}</b><span class="close" (click)="delete()">X</span><br />
+  <b (click)="select()">{{ this.webcomic.name }}</b> {{ state() }}<span class="close" (click)="delete()">X</span><br />
   <a href="{{ this.webcomic.url }}">{{ this.webcomic.name }}</a>
 </div>

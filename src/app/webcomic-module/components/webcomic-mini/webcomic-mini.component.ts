@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { State } from '../../enums/state.enum';
 import { Webcomic } from '../../models/webcomic';
 
 @Component({
@@ -20,6 +21,11 @@ export class WebcomicMiniComponent implements OnInit {
   image() : string {
     if (!this.webcomic.picture) return '';
     return `data:image/png;base64,${this.webcomic.picture}`;
+  }
+
+  state() : string {
+    if (typeof this.webcomic.state == 'number') return State[this.webcomic.state];
+    return this.webcomic.state;
   }
 
   delete() : void {
