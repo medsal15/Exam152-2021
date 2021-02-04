@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PortalComponent } from './components/portal/portal.component';
 import { AuthorListComponent } from './author-module/components/author-list/author-list.component';
 import { WebcomicListComponent } from './webcomic-module/components/webcomic-list/webcomic-list.component';
+import { AuthorexistsGuard } from './guards/authorexists/authorexists.guard';
 
 const routes: Routes = [
   {
@@ -15,7 +16,10 @@ const routes: Routes = [
       },
       {
         path: 'webcomics',
-        component: WebcomicListComponent
+        component: WebcomicListComponent,
+        canActivate: [
+          AuthorexistsGuard,
+        ]
       }
     ],
   },
