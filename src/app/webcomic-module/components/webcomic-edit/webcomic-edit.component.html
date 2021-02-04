@@ -32,7 +32,7 @@
     <tr *ngFor="let author of this.authors">
       <td><label for="author_{{ author.id }}">{{ author.name }}</label></td>
       <td>
-        <input type="checkbox" name="authors" value="author_{{ author.id }}" id="author{{ author.id }}"
+        <input type="checkbox" name="authors" value="author_{{ author.id }}" id="author_{{ author.id }}"
           (change)="onAuthorChange(author.id)" [checked]="this.fake_webcomic.authors.includes(author.id)" />
       </td>
     </tr>
